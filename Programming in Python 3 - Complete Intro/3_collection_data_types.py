@@ -8,11 +8,11 @@ import copy
 
 print('-------------------------------------------------- Sequence Types')
 '''
-bytearray
-bytes
-list
-str
-typle
+    bytearray
+    bytes
+    list
+    str
+    typle
 '''
 #   Tuples
 
