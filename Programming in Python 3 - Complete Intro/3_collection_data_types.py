@@ -3,6 +3,8 @@ import collections
 import sys
 import string
 import os
+import random
+import copy
 
 print('-------------------------------------------------- Sequence Types')
 '''
@@ -264,10 +266,244 @@ words = collections.defaultdict(int)
 #   Ordered Dictionaries
 
 d = collections.OrderedDict([('z', -4), ('e', 19), ('k', 7)])
-tasks = collections.OrderedDict() 
+
+tasks = collections.OrderedDict()
+print(tasks)
+
 tasks[8031] = "Backup" 
 tasks[4027] = "Scan Email" 
 tasks[5733] = "Build System"
 
+print(d)
+print(tasks)
+
 print('-------------------------------------------------- Iterating and Copying Collections')
 
+print('*')
+product = 1
+for i in [1,2,4,8]:
+    product *= i
+print(product)
+
+print('*')
+product = 1
+i = iter([1,2,4,8])
+while True:
+    try:
+        product *= next(i)
+    except StopIteration:
+        break
+print(product)
+
+print('*')
+x = [-2,9,7,-4,3]
+print(all(x), any(x), len(x), min(x), max(x), sum(x))
+x.append(0)
+print(all(x), any(x), len(x), min(x), max(x), sum(x))
+'''
+print('*')
+if len(sys.argv) < 3:
+    print('usage: grepword.py word infile1 [infile2 [... infileN]]')
+    sys.exit()
+word = sys.argv[1]
+for filename in sys.argv[2:]:
+    for lino, line in enumerate(open(file), start = 1):
+        if word in line:
+            print('{0}:{1}:{2:.40}'.format(filename, lino, line.rstrip()))
+'''        
+print('*')
+x = list(range(5))
+print(list(range(9,14)))
+print(tuple(range(10, -11, -5)))
+
+print('*')
+for i in range(len(x)):
+    x[i] = abs(x[i])
+    print(x[i])
+
+print('*')
+i = 0
+while i < len(x):
+    x[i] = abs(x[i])
+    i += 1
+    print(i)
+
+print('*')
+def get_fnames_and_snames():
+    fnames = []
+    snames = []
+    for names, filename in ((fnames, '*.txt'), (snames, '*.txt')):
+        for name in open(filename, encoding = 'utf8'):
+            names.append(name.rstrip())
+    return fnames, snames
+'''
+print('*')
+fnames, snames = get_fnames_and_snames()
+fh = open('*.txt','w',ecoding='utf8')
+for i in range (100):
+    line = '{0} {1}\n'.format(random.choice(fnames), random.choice(snames))
+    fh.write(line)
+'''
+print('*')
+for t in zip(range(4), range(0,10,2), range(1,10,2)):
+    print(t)
+'''
+print('*')
+limit = 100
+years = list(range(1970, 2020)) * 3
+for year, forename, surname in zip(random.sample(years, limit), random.sample(forename, limit),  random.sample(surname, limit)):
+    name = '{0} {1}'.format(forename, surname)
+    fh.write('{0:.25}.{1}\n'.format(name,year))
+'''
+print('*')
+print(list(range(6)))
+print(list(reversed(range(6))))
+
+print('*')
+x = []
+for t in zip(range(-10, 0, 1), range(0, 10, 2), range(1, 10, 2)):
+    x +=t
+    sorted(x)
+    sorted(x, reverse = True)
+    sorted(x, key = abs)
+
+print('*')
+x = ['q','w','e','r','t','y','u','d']
+
+a = sorted(x, key = str.lower)
+print(a)
+
+temp = []
+for item in x:
+    temp.append((item.lower(), item))
+x = []
+for key, value in sorted(temp):
+    x.append(value)
+    print(value)
+
+print('*')
+ 
+x = list(zip((1, 3, 1, 3), ("pram", "dorie", "kayak", "canoe")))
+
+def swap(t):
+    return t[1], t[0]
+
+t_swap = sorted(x, key = swap)
+print(t_swap)
+
+
+print('-------------------------------------------------- Copying Collections')
+
+songs = ['Because', 'Boys', 'Carol']
+beatles = songs
+b_list = beatles, songs
+print(b_list)
+
+beatles[2] = 'Cayenne'
+b_list = beatles, songs
+print(b_list)
+
+songs = ['Because', 'Boys', 'Carol']
+beatles = songs[:]
+beatles[2] = 'Cayenne'
+b_list = beatles, songs
+print(b_list)
+
+print('*')
+x = [53, 89, ['A','B','C']]
+y = x[:]
+l_all = x, y
+print(l_all)
+y[1] = 40
+x[2][0] = 'Q'
+print(l_all)
+
+#import copy
+x = [53, 89, ['A','B','C']]
+y = copy.deepcopy(x)
+l_all = x, y
+y[1] = 40
+x[2][0] = 'Q'
+print(l_all)
+
+print('-------------------------------------------------- Examples')
+
+#   generate_usernames.py
+
+#   statistics.py
+
+Statistics = collections.namedtuple('Statistics', 'mean mode median std_dev')
+
+
+def main():
+    if len(sys.argv) == 1 or sys.argv[1] in {'-h', '--help'}:
+        print('usage: {0} file1 [file2[... fileN'.format(sys.arg[0]))
+        sys.exit()
+    numbers = []
+    frequencies = collections.defaultdict(int)
+    for filename in sys.argv[1:]:
+        read_data(filename, numbers, frequencies)
+    if numbers:
+        statistics = calculate_statistics(numbers, frequencies)
+        print_results(len(numbers), statistics)
+    else:
+        print('No numbers found.')
+
+def read_data(filename, numbers, frquencies):
+    for lino, line in enumerate(open(filename, encoding='ascii'), start = 1):
+        for x in line.split():
+            try:
+                number = float(x)
+                numbers.append(number)
+                frequencies[number] += 1
+            except ValueError as err:
+                print('{filename}:{lino}:skipping {x}: {err}'.format(**locals()))
+
+def calculate_statistics(numbers, frequencies):
+    mean = sum(numbers) / len(number)
+    mode = calculate_mode(frequencies,3)
+    median = calculate_median(numbers)
+    std_dev = calculate_std_dev(numbers, mean)
+    return Statistics(mean, mode, median, std_dev)
+
+def calculate_mode(frequencies, maximum_modes):
+    highest_frequency = max(frequencies.values())
+    mode = [number for number, frequency in frequencies.item() if frequency == highest_frequency]
+    if not (1 <= len(mode) <= maximum_modes):
+        mode = None
+    else:
+        mode.sort()
+    return mode
+
+def calculate_median(numbers): 
+    numbers = sorted(numbers) 
+    middle = len(numbers) // 2 
+    median = numbers[middle] 
+    if len(numbers) % 2 == 0: 
+        median = (median + numbers[middle - 1]) / 2 
+        return median
+
+def calculate_std_dev(numbers, mean): 
+    total = 0 
+    for number in numbers: 
+        total += ((number - mean) ** 2) 
+        variance = total / (len(numbers) - 1) 
+        return math.sqrt(variance)
+
+def print_results(count, statistics):
+    real = "9.2f"
+    if statistics.mode is None:
+        modeline = ""
+    elif len(statistics.mode) == 1:
+        modeline = "mode    ={0:{fmt}\n".format(statistics.mode[0], fmt = real)
+    else:
+        modeline = ("mode   = [" + ", ".join(["{0:.2f}".format(m) 
+        for m in statistics.mode]) + "]\n") 
+    print("""\
+            count   = {0:6}
+            mean    = {mean:{fmt}}
+            median  = {median:{fmt}}
+            {1}\
+            std.dev. = {std_dev:{fmt}}""".format(count, modeline, ftm = real, **statistics._asdict()))
+    
+    
