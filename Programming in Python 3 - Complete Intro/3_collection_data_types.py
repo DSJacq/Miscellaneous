@@ -6,6 +6,11 @@ import os
 import random
 import copy
 
+
+
+dict = {i : chr(i) for i in range(0,90)}
+print(dict)
+
 print('-------------------------------------------------- Sequence Types')
 '''
     bytearray
