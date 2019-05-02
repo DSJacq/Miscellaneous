@@ -58,4 +58,10 @@ Object operators
 
 ### 6 - Using Logging 
 
+Overview of logging
+
+Basic logging
+
+Custom logging
+
 ### 7 - Python Comprehensions
