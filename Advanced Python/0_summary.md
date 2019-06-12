@@ -1,6 +1,6 @@
 ### SUMMARY
 
-1 - Python Language Features
+**1 - Python Language Features**
 
 Python coding style
 
@@ -11,7 +11,8 @@ String vs bites
 Template strings
 
 
-2 - Built-In Functions
+
+**2 - Built-In Functions**
 
 Utilities
 
@@ -22,7 +23,8 @@ Transforms
 Itertools
 
 
-3 - Advanced Python Functions
+
+**3 - Advanced Python Functions**
 
 Function Documentation Strings
 
@@ -33,7 +35,8 @@ Lambda Functions
 Keyword-Only Argumetns
 
 
-4 - Advanced Collections
+
+**4 - Advanced Collections**
 
 Advanced Collections Overview
 
@@ -48,7 +51,8 @@ OrderDict
 Daque objects
 
 
-5 - Advanced Classes and Objects
+
+**5 - Advanced Classes and Objects**
 
 Advanced Classes Overview
 
@@ -61,7 +65,8 @@ Computed attributes
 Object operators
 
 
-6 - Using Logging 
+
+**6 - Using Logging **
 
 Overview of logging
 
@@ -70,7 +75,8 @@ Basic logging
 Custom logging
 
 
-7 - Python Comprehensions
+
+**7 - Python Comprehensions**
 
 What are comprehensions
 
@@ -79,4 +85,5 @@ List comprehensions
 Dictionary comprehensions
 
 Set comprehensions
+
 
