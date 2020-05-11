@@ -1,27 +1,38 @@
-L = []
-N = int(input())
-while 1:
-    try:
-        inp = raw_input().strip()
-        while "  " in inp: inp.replace("  "," ")
-        command = map(str,inp.split())
-    except:
-        break
-    if len(command)>1: command[1]=int(command[1])
-    if len(command)>2: command[2]=int(command[2])
-        
-    if command[0]=="sort":
-        L.sort()
-    elif command[0]=="print":
-        print L
-    elif command[0]=="reverse":
-        #L.reverse()
-        L=L
-    elif command[0]=="pop":
-        L.pop()
-    elif command[0]=="insert":
-        L.insert(command[1],command[2])
-    elif command[0]=="append":
-        L.append(command[1])
-    elif command[0]=="remove":
-        L.remove(command[1])
+def lines_from_stdin(n):
+    n = int(n)
+    for i in range(n):
+        yield input().rstrip('\n').split()
+
+def matching_lines(lines, patterns):
+    for line in lines:
+        for pattern in patterns:
+            if pattern in line:
+                yield line
+
+def matching_lines_from_stdin(pattern, n):
+    lines = lines_from_stdin(n)
+    matching = matching_lines(lines, pattern)
+    yield from matching
+
+def map_list_commands(n):
+    answer = list()
+    funcs = dir(list) + ['print']
+    matching = matching_lines_from_stdin(funcs, n)
+    for vals in matching:
+        func = vals[0]
+        if func in dir(list):
+            try:
+                val1, val2 = int(vals[1]), int(vals[2])
+                method = getattr(answer, func)(val1, val2)
+            except IndexError:
+                try:
+                    val1 = int(vals[1])
+                    method = getattr(answer, func)(val1)
+                except IndexError:
+                    method = getattr(answer, func)()
+        elif func == 'print':
+            print(answer)
+
+if __name__ == '__main__':
+    N = input()
+    map_list_commands(N)
