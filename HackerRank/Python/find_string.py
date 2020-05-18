@@ -10,7 +10,7 @@ if __name__ == '__main__':
     count = count_substring(string, sub_string)
     print(count)
     
-    # Option 2
+# Option 2
     
     A = raw_input().strip()
 x = raw_input().strip()
