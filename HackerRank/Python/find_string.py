@@ -10,6 +10,7 @@ if __name__ == '__main__':
     count = count_substring(string, sub_string)
     print(count)
     
+    
 # Option 2
     
     A = raw_input().strip()
@@ -20,6 +21,7 @@ for i in range(len(A) - len(x) + 1):
     if A[i:i+len(x)] == x:
         count += 1
 print count
+
 
 # Option 3
 
