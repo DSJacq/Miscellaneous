@@ -1,6 +1,5 @@
 #!/bin/python3
 
-
 N = int(input())
 
 # option 1
