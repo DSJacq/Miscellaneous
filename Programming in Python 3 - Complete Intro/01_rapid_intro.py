@@ -1,7 +1,6 @@
 import sys
 import random
 
-
 print('-------------------------------------------------- tuple')
 
 tuple = ('One', 'Two')
