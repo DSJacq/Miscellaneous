@@ -1,3 +1,4 @@
+
 def get_prime_factors(N):
     factors = list()
     divisor = 2
